@@ -1,9 +1,9 @@
 enablePlugins(GatlingPlugin)
 
-scalaVersion := "2.11.6"
+scalaVersion := "2.11.7"
 
 scalacOptions := Seq(
-  "-encoding", "UTF-8", "-target:jvm-1.7", "-deprecation",
+  "-encoding", "UTF-8", "-target:jvm-1.8", "-deprecation",
   "-feature", "-unchecked", "-language:implicitConversions", "-language:postfixOps")
 
 val gatlingVersion = "2.2.0-M3"
@@ -14,13 +14,14 @@ xerial.sbt.Sonatype.sonatypeRootSettings
 // http://www.scala-sbt.org/0.13/docs/Using-Sonatype.html
 
 publishMavenStyle := true
-publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-}
+publishTo :=  Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository")))
+//publishTo := {
+//  val nexus = "https://oss.sonatype.org/"
+//  if (isSnapshot.value)
+//    Some("snapshots" at nexus + "content/repositories/snapshots")
+//  else
+//    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+//}
 
 version := "0.6-SNAPSHOT"
 organization := "sc.ala"
